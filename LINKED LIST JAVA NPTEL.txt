@@ -1,0 +1,176 @@
+// THIS PROGRAM ILLUSTRATES IMPLEMENTATION OF LINKED LIST AS GENERIC CLASS IN JAVA 
+
+import java.util.*;
+import java.io.*;
+
+class JLinkedList <T>
+{
+    Node head;
+    class Node 
+    {
+        T data;
+        Node next;
+        Node()
+        {
+            data= null;
+            next=null;
+        }
+        Node(T d)
+        {
+            data = d;
+            next = null;
+        }
+    }
+    JLinkedList()
+    {
+        head = new Node ();
+    }
+    
+    public void printlist()
+    {
+        Node n=this.head.next;
+        while(n!=null)
+        {
+            System.out.print(n.data + " ");
+            n=n.next;
+        }
+        System.out.println();
+    }
+    
+    public void insertfront(T data)
+    {
+        Node  new_node = new Node (data);
+        new_node.next=this.head.next;
+        this.head.next=new_node;
+    }
+    
+    public void insertatend(T data)
+    {
+        Node new_node = new Node (data);
+        Node temp = this.head;
+        while(temp.next!=null)
+        temp=temp.next;
+        temp.next=new_node;
+    }
+    public void insertKey(T data, T key)
+    {
+        Node new_node = new Node (data);
+        boolean status = false;
+        Node temp = head;
+        while(temp!=null)
+        {
+            if(temp.data==key)
+            {
+                status = true;
+                break;
+            }
+            temp=temp.next;
+        }
+        if(status)
+        {
+            new_node.next = temp.next;
+           temp.next = new_node;
+        }
+    }
+    
+    public void Merge(JLinkedList<T> l2)
+    {
+        Node l1= this.head.next;
+        while(l1.next!=null)
+        l1=l1.next;
+        l1.next=l2.head.next;
+        //free(l2.head);
+    }
+    
+    public T deleteatfront()
+    {
+        T x= null;
+        Node temp= head.next;
+        if(temp!=null)
+        {
+            x = temp.data;
+            this.head.next = temp.next;
+        }
+        return x;
+    }
+    
+    public T deleteatend()
+    {
+        T x= null;
+        Node temp=this.head.next,prev=null;
+        if(temp==null)
+        return x;
+        while(temp!=null)
+        {
+            prev=temp;
+            temp=temp.next;
+        }
+        x=temp.data;
+        prev.next=null;
+        return x; 
+    }
+    
+    public T deletekey(T key)
+    {
+        T x = null;
+        Node temp=this.head.next, prev=null;
+        while(temp!=null)
+        {
+            if(temp.data==key)
+            {
+                prev.next=temp.next;
+                x=temp.data;
+                break;
+            }
+            prev=temp;
+            temp=temp.next;
+        }
+        return x;
+    }
+    
+    public void reversell()
+    {
+        Node curr=this.head.next,prev=null,next=null;
+        while(curr!=null)
+        {
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        this.head.next=prev;
+    }
+    
+     
+    public static void main(String[] args)
+    {
+        JLinkedList <Integer> ll = new JLinkedList <Integer> ();
+        JLinkedList <Integer> aa = new JLinkedList <Integer> ();
+        JLinkedList <String> lb  = new JLinkedList <String> ();
+       // Node <String> obj = new Node <String> ("KKK"); // ONLY IF NODE IS STATIC
+        lb.insertfront("ARUN");
+        lb.insertfront("ARUN");
+        lb.insertfront("ARUN");
+        aa.insertatend(1);
+        aa.insertatend(2);
+        aa.insertatend(3);
+        ll.insertfront(56);
+        ll.insertfront(59);
+        ll.insertfront(59);
+        ll.insertfront(59);
+        ll.insertatend(40);
+        ll.insertKey(60,59);
+        lb.insertatend("AMAN");
+        aa.printlist();
+        aa.Merge(ll);
+        System.out.println("ELEMENT DELETED : " + aa.deleteatfront());
+        System.out.println("ELEMENT DELETED : " + ll.deleteatfront());
+        System.out.println("ELEMENT DELETED : " + lb.deleteatfront());
+        System.out.println("ELEMENT DELETED : " + lb.deleteatend());
+        System.out.println("ELEMENT DELETED : " + ll.deletekey(40));
+        aa.reversell();
+        aa.printlist();
+        ll.printlist();
+        lb.printlist();
+    }
+}
