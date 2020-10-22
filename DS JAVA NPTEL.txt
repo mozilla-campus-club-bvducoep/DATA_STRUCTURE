@@ -1,3 +1,5 @@
+// THIS PROGRAM ILLUSTRATES IMPLEMENTATION OF LINKED LIST AS GENERIC CLASS IN JAVA 
+
 import java.util.*;
 import java.io.*;
 
