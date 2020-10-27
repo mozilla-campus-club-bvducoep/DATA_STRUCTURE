@@ -29,6 +29,6 @@ public class Main
         p.add(b1);
         p.add(b2);
         p.add(b3);
-        System.out.println("SIZE OF THE QUEUE " + q.size() + "ID OF THE BOOK AT THE TOP = " + p.peek().id);
+        System.out.println("SIZE OF THE QUEUE = " + p.size() + " ID OF THE BOOK AT THE TOP = " + p.peek().id);
     }
 }
